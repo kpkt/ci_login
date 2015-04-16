@@ -5,13 +5,6 @@ if (!defined('BASEPATH'))
 
 class Authentications extends CI_Controller {
 
-    public $badPasswords = array(
-        'password',
-        '12343456789',
-        'abcd', 'wxyz', 'qwerty',
-        'zaq1', '2wsx', 'cde3'
-    );
-
     /**
      * __construct method     
      * @return void
@@ -65,7 +58,6 @@ class Authentications extends CI_Controller {
      * @return void
      */
     public function register() {
-
         //set form validation
         $this->form_validation->set_rules(array(
             array('field' => 'username', 'label' => 'Username', 'rules' => 'required'),
@@ -100,7 +92,8 @@ class Authentications extends CI_Controller {
      */
     public function password_check($str) {
         $string = strtolower($str);
-        $badPasswords = $this->badPasswords;
+        //$badPasswords = $this->badPasswords;
+        $badPasswords = $this->config->item('bad_password');
         foreach ($badPasswords as $key => $val) {
             if (strlen(strstr($string, "$val")) > 0) {
                 $this->form_validation->set_message('password_check', 'Your password is too similar to your name or email address or other common/simple passwords.');

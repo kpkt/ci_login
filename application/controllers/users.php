@@ -6,6 +6,12 @@ if (!defined('BASEPATH'))
 class Users extends CI_Controller {
 
     /**
+     * isRegistered method     
+     * @return void
+     */
+    public $defaultPassword = 'sp5OXx46Iw';
+
+    /**
      * __construct method     
      * @return void
      */
@@ -15,6 +21,10 @@ class Users extends CI_Controller {
         $this->isRegistered();
     }
 
+    /**
+     * isRegistered method     
+     * @return void
+     */
     public function isRegistered() {
         if (($this->session->userdata('user_session') == FALSE)) {
             $this->session->set_flashdata('item', array('message' => 'You are not authorized. Please login!', 'class' => 'danger')); //danger or success            
@@ -40,22 +50,44 @@ class Users extends CI_Controller {
     public function add() {
         //set form validation
         $this->form_validation->set_rules(array(
-            array('field' => 'name', 'label' => 'Username', 'rules' => 'required'),
+            array('field' => 'username', 'label' => 'Username', 'rules' => 'required'),
+            array('field' => 'name', 'label' => 'Name', 'rules' => 'required'),
             array('field' => 'email', 'label' => 'Email', 'rules' => 'required|valid_email')
         ));
         //if validation not run, just show form
         if ($this->form_validation->run() == FALSE) {
-            $data['main'] = '/users/add';
-            $this->load->view('layouts/default', $data);
+            $data['main'] = 'authentications/register'; //set view
+            $this->load->view('layouts/login', $data); //set layout
         } else {
             $data = array(
+                'username' => $this->input->post('username'),
+                'password' => $this->AuthenticationModel->pwd_hash($this->input->post('password')),
                 'name' => $this->input->post('name'),
-                'email' => $this->input->post('email')
+                'email' => $this->input->post('email'),
             );
             $this->UserModel->create($data); //load model
             //set flash message
-            $this->session->set_flashdata('item', array('message' => 'The user has been saved', 'class' => 'success')); //danger or success            
-            redirect('users/index'); // back to the index
+            $this->session->set_flashdata('item', array('message' => 'Registration Successful', 'class' => 'success')); //danger or success            
+            redirect('authentications/login'); // back to the index
+        }
+    }
+
+###Validation callback###
+
+    /**
+     * validation callback   
+     * @return void
+     */
+    public function password_check($str) {
+        $string = strtolower($str);
+        $badPasswords = $this->badPasswords;
+        foreach ($badPasswords as $key => $val) {
+            if (strlen(strstr($string, "$val")) > 0) {
+                $this->form_validation->set_message('password_check', 'Your password is too similar to your name or email address or other common/simple passwords.');
+                return FALSE;
+            } else {
+                return TRUE;
+            }
         }
     }
 
