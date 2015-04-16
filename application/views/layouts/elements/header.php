@@ -1,11 +1,15 @@
-   <?php $authUser = $this->session->userdata('user_session'); ?>
+<?php $authUser = $this->session->userdata('user_session'); ?>
 <div class="header clearfix">
+    <div style="padding-bottom: 5px;">
+        <p class="text-muted">Login as : <?php echo $authUser['name'] ?>
+            <span class="pull-right"><a class="btn btn-success btn-sm" href="<?php echo base_url("index.php/authentications/logout") ?>">Logout</a></span>
+        </p>
+    </div>
+    <div class="clearfix"></div>
     <nav>
         <ul class="nav nav-pills pull-right">
             <li role="presentation" class=" <?php echo (empty($this->uri->segment(1)) ? 'active' : '') ?>"><a href="<?php echo base_url() ?>">Home</a></li>
-            <li role="presentation" class=" <?php echo ($this->uri->segment(1) == 'users' ? 'active' : '') ?>"><a href="<?php echo base_url("index.php/users/index") ?>">Users</a></li>
-            <li role="presentation" class=" <?php echo ($this->uri->segment(1) == 'posts' ? 'active' : '') ?>"><a href="<?php echo base_url("index.php/posts/index") ?>">Posts</a></li>
-            <li role="presentation"><a href="<?php echo base_url("index.php/authentications/logout") ?>">Logout</a></li>
+            <li role="presentation" class=" <?php echo ($this->uri->segment(1) == 'users' ? 'active' : '') ?>"><a href="<?php echo base_url("index.php/users/index") ?>">Users</a></li>            
         </ul>
     </nav>
     <h3 class="text-muted">Project: Codeigniter CRUD : <?php echo $authUser['username'] ?></h3>

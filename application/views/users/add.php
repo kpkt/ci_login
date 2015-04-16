@@ -1,25 +1,28 @@
-<h2><?php echo 'Add User'; ?></h2>
-<?php echo form_open('users/add', array('class' => 'form-horizontal')); ?>
-<div class="form-group">
-    <label for="UserName" class="col-sm-2 control-label">User Name :</label>
-    <div class="col-sm-10">
-        <input type="text" class="form-control" name="name" id="UserName" placeholder="Full Name">
-        <?php echo form_error('name', '<div class="error">', '</div>'); ?>
+<div class="row">
+    <div class="col-md-12">   
+        <h2>Example CI LOGIN</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading">Registration Form</div>
+            <div class="panel-body">
+                <?php echo form_open('users/add', array('novalidate' => true)); // ?>
+                <div class="form-group">
+                    <label for="UserUsername" class="control-label">Username :</label>
+                    <input type="text" class="form-control" name="username" id="UserUsername" placeholder="username" value="<?php echo set_value('username'); ?>">
+                    <?php echo form_error('username', '<div class="error">', '</div>'); ?>
+                </div>                
+                <div class="form-group">
+                    <label for="UserName" class="control-label">Full Name :</label>
+                    <input type="text" class="form-control" name="name" id="UserName" placeholder="Full Name" value="<?php echo set_value('name'); ?>">
+                    <?php echo form_error('name', '<div class="error">', '</div>'); ?>
+                </div>
+                <div class="form-group">
+                    <label for="UserEmail" class="control-label">User Email :</label>
+                    <input type="text" class="form-control" name="email" id="UserEmail" placeholder="Email" value="<?php echo set_value('email'); ?>">
+                    <?php echo form_error('email', '<div class="error">', '</div>'); ?>
+                </div>                
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <?php echo form_close(); ?>
+            </div>           
+        </div>       
     </div>
 </div>
-<div class="form-group">
-    <label for="UserEmail" class="col-sm-2 control-label">User Email :</label>
-    <div class="col-sm-10">
-        <input type="text" class="form-control" name="email" id="UserEmail" placeholder="user@example.com">
-        <?php echo form_error('email', '<div class="error">', '</div>'); ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        <?php echo form_submit(array('name' => 'submit', 'value' => 'Submit', 'class' => 'btn btn-success')); ?>
-    </div>
-
-</div>
-<?php
-echo form_close();

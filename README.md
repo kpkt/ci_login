@@ -36,7 +36,7 @@ $config['dafault_password'] = 'sp5OXx46Iw';
 ```
 
 ##Bad Password
-Define list of bad password not aloow user using it when registration
+Define list of bad password not allow user using it when registration
 
 ```php
 $config['bad_password'] = array(

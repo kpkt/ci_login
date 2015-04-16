@@ -26,7 +26,21 @@ class AuthenticationModel extends CI_Model {
      */
     public function check_password($data) {
         $result = $this->exists($data['username']);
+
         if ($this->pwd_verify($data['password'], $result['password'])) {
+            return TRUE;
+        }
+    }
+
+    /**
+     * check_Current_password
+     * @return void    
+     * @desc get userdata before check password hash match
+     */
+    public function check_Current_password($data) {
+        $result = $this->exists($data['username']);
+
+        if ($this->pwd_verify($data['current_password'], $result['password'])) {
             return TRUE;
         }
     }
@@ -38,7 +52,7 @@ class AuthenticationModel extends CI_Model {
      */
     public function login($data) {
         if ($this->check_password($data)) {
-            $this->session->set_userdata('user_session',$this->exists($data['username']));
+            $this->session->set_userdata('user_session', $this->exists($data['username']));
             return TRUE;
         } else {
             return FALSE;

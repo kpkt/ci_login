@@ -370,7 +370,7 @@ $config['proxy_ips'] = '';
   | default password cannot empty
   |
  */
-$config['dafault_password'] = 'sp5OXx46Iw';
+$config['dafault_password'] = '33P3r23nkb';
 
 
 /*

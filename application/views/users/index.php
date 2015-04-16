@@ -18,6 +18,7 @@
                 <td><?php echo $user['name']; ?></td>
                 <td><?php echo $user['email']; ?></td>
                 <td>
+                    <a href="<?php echo base_url("index.php/users/change_password/" . $user['user_id']); ?>" title="Change Password" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></a>
                     <a href="<?php echo base_url("index.php/users/view/" . $user['user_id']); ?>" class="btn btn-default btn-xs">View</a>
                     <a href="<?php echo base_url("index.php/users/edit/" . $user['user_id']); ?>" class="btn btn-default btn-xs">Edit</a>                    
                     <a href="<?php echo base_url("index.php/users/delete/" . $user['user_id']); ?>"

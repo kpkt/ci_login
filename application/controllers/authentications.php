@@ -91,8 +91,7 @@ class Authentications extends CI_Controller {
      * @return void
      */
     public function password_check($str) {
-        $string = strtolower($str);
-        //$badPasswords = $this->badPasswords;
+        $string = strtolower($str);        
         $badPasswords = $this->config->item('bad_password');
         foreach ($badPasswords as $key => $val) {
             if (strlen(strstr($string, "$val")) > 0) {
