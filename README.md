@@ -46,3 +46,10 @@ $config['bad_password'] = array(
     'zaq1', '2wsx', 'cde3'
 );
 ```
+
+#Modul
+
+* Login validation for account exist and wrong password
+* Validate password with disallow user to using common/simple password
+* Configure for default password when create new user
+* Change new password with checking current password
